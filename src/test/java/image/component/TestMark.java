@@ -21,9 +21,9 @@ public class TestMark {
         ImageRemarkUtil.markImageByText(logoText, srcImgPath, targerTextPath);
         long end = System.currentTimeMillis();
         // 给图片添加水印文字,水印文字旋转-45
-        ImageRemarkUtil.markImageByText(logoText, srcImgPath, targerTextPath2, -45);
-        long end1 = System.currentTimeMillis();
-        System.out.println("给图片添加水印文字结束..."+(end1-end)+"ms "+(end-start)+"ms");
+//        ImageRemarkUtil.markImageByText(logoText, srcImgPath, targerTextPath2, -45);
+//        long end1 = System.currentTimeMillis();
+        System.out.println("给图片添加水印文字结束..."+(end-start)+"ms");
 
 //        String iconPath = "d:/2.jpg";
 
