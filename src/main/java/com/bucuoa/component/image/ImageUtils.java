@@ -101,37 +101,67 @@ public final class ImageUtils {
 		try {
 			File file = new File(srcImage);
 
-			Image image = ImageIO.read(file);
-			int width = image.getWidth(null);
-			int height = image.getHeight(null);
-			BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
-			Graphics2D g = bufferedImage.createGraphics();
-			g.drawImage(image, 0, 0, width, height, null);
-			g.setFont(new Font(fontName, fontStyle, fontSize));
-			g.setColor(color);
-			g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha));
-
-			int width_1 = fontSize * getLength(pressText);
-			int height_1 = fontSize;
-			int widthDiff = width - width_1;
-			int heightDiff = height - height_1;
-			if (x < 0) {
-				x = widthDiff / 2;
-			} else if (x > widthDiff) {
-				x = widthDiff;
-			}
-			if (y < 0) {
-				y = heightDiff / 2;
-			} else if (y > heightDiff) {
-				y = heightDiff;
-			}
-
-			g.drawString(pressText, x, y + height_1);
-			g.dispose();
+			BufferedImage bufferedImage = process(pressText, fontName, fontStyle, fontSize, color, x, y, alpha, file);
 			ImageIO.write(bufferedImage, PICTRUE_FORMATE_JPG, new File(targetImg));
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+
+	public static void pressText(String srcAndtargetImg, String pressText, String fontName, int fontStyle, int fontSize,
+			Color color, int x, int y, float alpha) {
+		try {
+			File file = new File(srcAndtargetImg);
+
+			BufferedImage bufferedImage = process(pressText, fontName, fontStyle, fontSize, color, x, y, alpha, file);
+			ImageIO.write(bufferedImage, PICTRUE_FORMATE_JPG, file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public static void pressText(File file, String pressText, String fontName, int fontStyle, int fontSize,
+			Color color, int x, int y, float alpha) {
+		try {
+//			File file = new File(srcAndtargetImg);
+
+			BufferedImage bufferedImage = process(pressText, fontName, fontStyle, fontSize, color, x, y, alpha, file);
+			ImageIO.write(bufferedImage, PICTRUE_FORMATE_JPG, file);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	private static BufferedImage process(String pressText, String fontName, int fontStyle, int fontSize, Color color,
+			int x, int y, float alpha, File file) throws IOException {
+		Image image = ImageIO.read(file);
+		int width = image.getWidth(null);
+		int height = image.getHeight(null);
+		BufferedImage bufferedImage = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
+		Graphics2D g = bufferedImage.createGraphics();
+		g.drawImage(image, 0, 0, width, height, null);
+		g.setFont(new Font(fontName, fontStyle, fontSize));
+		g.setColor(color);
+		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_ATOP, alpha));
+
+		int width_1 = fontSize * getLength(pressText);
+		int height_1 = fontSize;
+		int widthDiff = width - width_1;
+		int heightDiff = height - height_1;
+		if (x < 0) {
+			x = widthDiff / 2;
+		} else if (x > widthDiff) {
+			x = widthDiff;
+		}
+		if (y < 0) {
+			y = heightDiff / 2;
+		} else if (y > heightDiff) {
+			y = heightDiff;
+		}
+
+		g.drawString(pressText, x, y + height_1);
+		g.dispose();
+		return bufferedImage;
 	}
 
 	/**

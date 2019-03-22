@@ -20,6 +20,8 @@ public class TestImageUtils {
 	        System.out.println("给图片添加水印文字开始...");
 	        // 给图片添加水印文字
 	        ImageUtils.pressText(srcImgPath,targerTextPath, logoText, "宋体", Font.BOLD | Font.ITALIC, 80, Color.red, -140, -140, 0.8f);
+//	        ImageUtils.pressText(srcImgPath, logoText, "宋体", Font.BOLD | Font.ITALIC, 80, Color.red, -140, -140, 0.8f);
+
 	        long end = System.currentTimeMillis();
 	        // 给图片添加水印文字,水印文字旋转-45
 //	        ImageRemarkUtil.markImageByText(logoText, srcImgPath, targerTextPath2, -45);
